@@ -67,6 +67,14 @@
                     </form>
                 </div>
             </div>
+
+            <div class="card">
+                <div class="card-header">Login with Github</div>
+                <div class="card-body">
+                    <a href="login/github" class="btn btn-primary">Login via Github</a>
+                </div>
+            </div>
+            
         </div>
     </div>
 </div>
