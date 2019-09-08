@@ -71,7 +71,7 @@
             <div class="card">
                 <div class="card-header">Login with Github</div>
                 <div class="card-body">
-                    <a href="login/github" class="btn btn-primary">Login via Github</a>
+                    <a href="login/github" class="btn btn-primary">Login via Github <i class="fab fa-github fa-2x"></i></a>
                 </div>
             </div>
             
