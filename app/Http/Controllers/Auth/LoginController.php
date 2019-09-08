@@ -66,7 +66,7 @@ class LoginController extends Controller
 
         Auth::login($authenticatedUser, true);
 
-        return redirect('home')->with('user', $authenticatedUser);
+        return redirect('home')->with('authenticatedUser', $authenticatedUser);
     }
 
     /**
