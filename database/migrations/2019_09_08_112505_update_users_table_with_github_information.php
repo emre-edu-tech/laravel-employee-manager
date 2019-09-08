@@ -14,7 +14,7 @@ class UpdateUsersTableWithGithubInformation extends Migration
     public function up()
     {
         Schema::table('users', function(Blueprint $table) {
-            $table->string('github_id')->unique();
+            $table->string('github_id')->unique()->nullable();
             $table->string('avatar')->nullable();
             $table->string('password')->nullable()->change();
         });
