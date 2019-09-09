@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Image;
 
 class RegisterController extends Controller
 {
@@ -52,6 +53,7 @@ class RegisterController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'avatar' => ['image', 'mimes:jpeg,bmp,png,jpg', 'max:2048'],
         ]);
     }
 
@@ -63,10 +65,26 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        $request = app('request');
+        if($request->hasFile('avatar')) {
+            $avatar = $request->file('avatar');
+            $filename = time() . '-' . $avatar->getClientOriginalName();
+            $save_path = public_path('/images/avatars');
+            if(!file_exists($save_path)) {
+                mkdir($save_path, 666, true);
+            }
+            // upload the image using intervention library
+            Image::make($avatar)->resize(200,200)->save($save_path . '/' . $filename);
+        }else {
+            // our avatar is nullable but we want a default avatar for users who doesn't upload avatar picture while registering
+            $filename = 'default-avatar.png';
+        }
+
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
+            'avatar' => $filename,
         ]);
     }
 }
