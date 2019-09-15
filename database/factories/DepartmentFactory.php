@@ -7,10 +7,10 @@ use Faker\Generator as Faker;
 use App\Department;
 
 $factory->define(Department::class, function (Faker $faker) {
-	$name = $faker->departmentName;
+	$name = $faker->words(rand(1,2), true);
     return [
         'name' => $name,
-        'description' => $faker->sentence(rand(5,10), '.'),
+        'description' => $faker->sentences(rand(3,6), '.'),
         'slug' => str_slug($name, $separator = '-'),
     ];
 });
