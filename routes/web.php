@@ -16,5 +16,7 @@ Route::get('/', 'PagesController@home');
 Auth::routes();
 Route::get('login/github', 'Auth\LoginController@redirectToGithub');
 Route::get('login/github/callback', 'Auth\LoginController@handleGithubCallback');
+Route::resource('departments', 'DepartmentsController');
+Route::resource('employees', 'EmployeesController');
 
 Route::get('/home', 'HomeController@index')->name('home');
